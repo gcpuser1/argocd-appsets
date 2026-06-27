@@ -1,0 +1,28 @@
+{{- range .Values.tenants }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .name }}
+  namespace: argocd
+spec:
+  description: "Project for {{ .name }} tenant"
+  sourceRepos:
+  {{- range .repos }}
+  - {{ . }}
+  {{- end }}
+  destinations:
+    - namespace: {{ .namespacePrefix }}-*
+      server: https://kubernetes.default.svc
+  namespaceResourceWhitelist:
+    - group: "apps"
+      kind: Deployment
+    - group: ""
+      kind: Service
+  roles:
+    - name: {{ .name }}-admin
+      description: "Admin role for {{ .name }} team"
+      policies:
+        - p, proj:{{ .name }}:{{ .name }}-admin, applications, get, {{ .name }}/*, allow
+        - p, proj:{{ .name }}:{{ .name }}-admin, applications, sync, {{ .name }}/*, allow
+{{- end }}

@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tenant-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/gcpuser1/argocd-appsets
+        revision: HEAD
+        files:
+          - path: appproject-chart/values.yaml
+  template:
+    metadata:
+      name: "{{tenants.name}}-app" # one Application per tenant
+    spec:
+      project: "{{tenants.name}}" # links to AppProject
+      source:
+        repoURL: "{{tenants.repo}}"
+        targetRevision: HEAD
+        path: manifests
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{tenants.namespacePrefix}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

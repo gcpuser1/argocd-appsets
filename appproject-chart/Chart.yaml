@@ -1,0 +1,4 @@
+apiVersion: v2
+name: approject-chart
+description: Generates Argocd Appproject for Tenants
+version: 0.1.0
