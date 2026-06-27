@@ -14,11 +14,16 @@ spec:
   destinations:
     - namespace: {{ .namespacePrefix }}-*
       server: https://kubernetes.default.svc
+    - namespace: {{ .namespacePrefix }}
+      server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
     - group: "apps"
       kind: Deployment
     - group: ""
       kind: Service
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
   roles:
     - name: {{ .name }}-admin
       description: "Admin role for {{ .name }} team"
