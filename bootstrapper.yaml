@@ -8,6 +8,7 @@ spec:
   source:
     repoURL: https://github.com/gcpuser1/argocd-appsets
     targetRevision: HEAD
+    path: .
     directory:
       recurse: true
   destination:
