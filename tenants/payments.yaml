@@ -1,0 +1,3 @@
+name: payments
+repo: https://github.com/gcpuser1/payments-gitops
+namespacePrefix: payments
