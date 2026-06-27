@@ -1,9 +1,7 @@
 tenants:
   - name: payments
-    repos:
-      - https://github.com/gcpuser1/payments-gitops
+    repo: https://github.com/gcpuser1/payments-gitops
     namespacePrefix: payments
   - name: accounts
-    repos:
-      - https://github.com/gcpuser1/accounts-gitops
+    repo: https://github.com/gcpuser1/accounts-gitops
     namespacePrefix: accounts

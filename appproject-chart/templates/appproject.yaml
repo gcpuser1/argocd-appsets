@@ -8,9 +8,7 @@ metadata:
 spec:
   description: "Project for {{ .name }} tenant"
   sourceRepos:
-  {{- range .repos }}
-  - {{ . }}
-  {{- end }}
+    - {{ .repo }}
   destinations:
     - namespace: {{ .namespacePrefix }}-*
       server: https://kubernetes.default.svc

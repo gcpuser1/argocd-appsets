@@ -9,19 +9,19 @@ spec:
         repoURL: https://github.com/gcpuser1/argocd-appsets
         revision: HEAD
         files:
-          - path: tenants.json
+          - path: appproject-chart/values.yaml
   template:
     metadata:
-      name: "{{name}}-app"
+      name: "{{tenants.name}}-app"
     spec:
-      project: "{{name}}"
+      project: "{{tenants.name}}"
       source:
-        repoURL: "{{repo}}"
+        repoURL: "{{tenants.repo}}"
         targetRevision: HEAD
         path: manifests
       destination:
         server: https://kubernetes.default.svc
-        namespace: "{{namespacePrefix}}"
+        namespace: "{{tenants.namespacePrefix}}"
       syncPolicy:
         automated:
           prune: true
