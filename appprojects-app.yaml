@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap
+  name: appprojects
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/gcpuser1/argocd-appsets
     targetRevision: HEAD
-    path: .
-    directory:
-      recurse: true
-      exclude: 'appproject-chart/**'
+    path: appproject-chart
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
